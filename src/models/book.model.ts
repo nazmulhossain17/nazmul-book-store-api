@@ -7,6 +7,8 @@ const bookSchema = new Schema<IBook>(
     title: {
       type: String,
       required: true,
+      unique: true,
+      message: "The book is already available!!",
     },
     author: {
       type: String,
@@ -30,5 +32,5 @@ const bookSchema = new Schema<IBook>(
   }
 );
 
-const Books = model<IBook, BookModel>("User", bookSchema);
+const Books = model<IBook, BookModel>("Book", bookSchema);
 export default Books;
