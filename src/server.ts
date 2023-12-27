@@ -4,15 +4,15 @@ import app from "./app";
 
 async function main() {
   try {
-    await mongoose.connect(config.dbURL as string).then(() => {
-      console.log("Database connected");
-    });
+    // Use await without ".then()" to handle the promise
+    await mongoose.connect(config.dbURL as string);
+    console.log("Database connected");
 
     app.listen(config.port, () => {
       console.log(`Server running on port ${config.port}`);
     });
   } catch (error) {
-    console.log("Error", error);
+    console.error("Error:", error);
   }
 }
 
