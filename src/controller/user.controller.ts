@@ -56,8 +56,8 @@ const loginUser: RequestHandler = async (req: Request, res: Response) => {
       return res.status(401).json({ message: "Incorrect email or password" });
     }
 
-    // const token = jwt.sign({ id: user._id }, jwtKey);
-    const token = jwt.sign({ user }, config.jwtKey!);
+    const token = jwt.sign({ id: user._id }, config.jwtKey!);
+    // const token = jwt.sign({ user }, config.jwtKey!);
 
     res
       .status(200)
@@ -68,4 +68,13 @@ const loginUser: RequestHandler = async (req: Request, res: Response) => {
   }
 };
 
-export { createUser, loginUser };
+const handleLogOut: RequestHandler = async (req: Request, res: Response) => {
+  try {
+    res.clearCookie("access_token");
+    return res.status(200).json({ message: "Log out successful" });
+  } catch (error) {
+    return res.status(500).send((error as Error).message);
+  }
+};
+
+export { createUser, loginUser, handleLogOut };
