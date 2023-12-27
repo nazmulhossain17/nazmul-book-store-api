@@ -1,5 +1,5 @@
 import express, { Request, Response } from "express";
-import { createUser } from "../controller/user.controller";
+import { createUser, loginUser } from "../controller/user.controller";
 
 const router = express.Router();
 
@@ -8,5 +8,6 @@ router.get("/", (req: Request, res: Response) => {
 });
 
 router.post("/create-user", createUser);
+router.post("/login", loginUser);
 
 export default router;
