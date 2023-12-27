@@ -47,4 +47,21 @@ const updateBook: RequestHandler = async (req: Request, res: Response) => {
   }
 };
 
-export { createBooks, updateBook };
+const deleteBook: RequestHandler = async (req, res) => {
+  const bookId = req.params.id; // Get book ID from route parameters
+
+  try {
+    // Find and delete the book by ID
+    const deletedBook = await Books.findByIdAndDelete(bookId);
+
+    if (!deletedBook) {
+      return res.status(404).json({ message: "Book not found" });
+    }
+
+    return res.status(200).json({ message: "Book deleted successfully" });
+  } catch (error) {
+    return res.status(500).send((error as Error).message);
+  }
+};
+
+export { createBooks, updateBook, deleteBook };
