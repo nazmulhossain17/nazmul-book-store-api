@@ -56,8 +56,8 @@ const loginUser: RequestHandler = async (req: Request, res: Response) => {
       return res.status(401).json({ message: "Incorrect email or password" });
     }
 
-    const token = jwt.sign({ id: user._id }, config.jwtKey!);
-    // const token = jwt.sign({ user }, config.jwtKey!);
+    // const token = jwt.sign({ id: user._id }, config.jwtKey!);
+    const token = jwt.sign({ user }, config.jwtKey!);
 
     res
       .status(200)

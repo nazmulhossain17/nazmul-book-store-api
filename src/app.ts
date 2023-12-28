@@ -6,7 +6,10 @@ import bookRouter from "./routes/book.route";
 
 const app: Application = express();
 
-app.use(cors());
+app.use(cors({ 
+  origin: 'http://localhost:5173', // Replace with the actual origin of your client
+  credentials: true, // Allow cookies to be sent with the request
+}));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());

@@ -64,4 +64,28 @@ const deleteBook: RequestHandler = async (req, res) => {
   }
 };
 
-export { createBooks, updateBook, deleteBook };
+const getAllBooks: RequestHandler = async (req, res) => {
+  try {
+    const products = await Books.find();
+    return res.status(200).send({ message: "product data fetched", products });
+  } catch (error) {
+    return res.status(500).send((error as Error).message);
+  }
+};
+
+const getSingleBook: RequestHandler = async (req, res) => {
+  try {
+    const id = req.params.id;
+    const result = await Books.findOne({ _id: id });
+    if (!result) {
+      return res.status(404).json({ message: "Product not found" });
+    }
+    return res
+      .status(200)
+      .send({ message: "Single book data fetched", result });
+  } catch (error) {
+    return res.status(500).send((error as Error).message);
+  }
+};
+
+export { createBooks, getAllBooks, getSingleBook, updateBook, deleteBook };
