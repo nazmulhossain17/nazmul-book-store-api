@@ -62,7 +62,6 @@ const loginUser: RequestHandler = async (req: Request, res: Response) => {
       .cookie("access_token", token, {
         httpOnly: true,
         secure: process.env.NODE_ENV === "production",
-        domain: "https://book-store-f8f28.web.app/",
       })
       .json({ success: true, message: "Login successful" });
   } catch (error) {
