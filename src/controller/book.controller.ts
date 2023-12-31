@@ -2,7 +2,7 @@ import { Request, RequestHandler, Response } from "express";
 import Books from "../models/book.model";
 
 const createBooks: RequestHandler = async (req: Request, res: Response) => {
-  const { title, image, author, genre, description } = req.body;
+  const { title, image, author, genre, description, price } = req.body;
 
   try {
     const booksData = new Books({
@@ -11,6 +11,7 @@ const createBooks: RequestHandler = async (req: Request, res: Response) => {
       author,
       genre,
       description,
+      price,
     });
     const createdData = await booksData.save();
     return res.status(201).json(createdData);
@@ -34,7 +35,7 @@ const updateBook: RequestHandler = async (req: Request, res: Response) => {
         genre,
         description,
       },
-      { new: true } // This option returns the updated document
+      { new: true }
     );
 
     if (!updatedBook) {
@@ -48,10 +49,9 @@ const updateBook: RequestHandler = async (req: Request, res: Response) => {
 };
 
 const deleteBook: RequestHandler = async (req, res) => {
-  const bookId = req.params.id; // Get book ID from route parameters
+  const bookId = req.params.id;
 
   try {
-    // Find and delete the book by ID
     const deletedBook = await Books.findByIdAndDelete(bookId);
 
     if (!deletedBook) {

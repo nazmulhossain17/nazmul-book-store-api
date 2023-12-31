@@ -7,8 +7,8 @@ import bookRouter from "./routes/book.route";
 const app: Application = express();
 
 app.use(cors({ 
-  origin: 'http://localhost:5173', // Replace with the actual origin of your client
-  credentials: true, // Allow cookies to be sent with the request
+  origin: 'http://localhost:5173', 
+  credentials: true, 
 }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -25,12 +25,12 @@ interface ErrorResponse {
   message: string;
 }
 
-// Define a helper function for sending error responses
+
 const errorResponse = (res: Response, error: ErrorResponse) => {
   return res.status(error.status).json({ error: error.message });
 };
 
-// Middleware for handling errors
+
 app.use(
   (err: ErrorResponse, req: Request, res: Response, next: NextFunction) => {
     return errorResponse(res, {

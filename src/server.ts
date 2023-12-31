@@ -4,7 +4,7 @@ import app from "./app";
 
 async function main() {
   try {
-    // Use await without ".then()" to handle the promise
+    
     await mongoose.connect(config.dbURL as string);
     console.log("Database connected");
 

@@ -51,7 +51,6 @@ const isLoggedOut = async (
   }
 };
 
-// Define the errorResponse function separately
 const errorResponse = (
   res: Response,
   { statusCode, message }: { statusCode: number; message: string }

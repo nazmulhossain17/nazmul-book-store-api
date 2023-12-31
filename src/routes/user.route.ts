@@ -4,7 +4,7 @@ import {
   handleLogOut,
   loginUser,
 } from "../controller/user.controller";
-// Some other file
+
 import { isLoggedIn, isLoggedOut } from "../middleware/auth.middleware";
 
 const router = express.Router();
