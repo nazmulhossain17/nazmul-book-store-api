@@ -6,10 +6,12 @@ import bookRouter from "./routes/book.route";
 
 const app: Application = express();
 
-app.use(cors({ 
-  origin: 'http://localhost:5173', 
-  credentials: true, 
-}));
+app.use(
+  cors({
+    origin: "https://book-store-f8f28.web.app",
+    credentials: true,
+  })
+);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
@@ -25,11 +27,9 @@ interface ErrorResponse {
   message: string;
 }
 
-
 const errorResponse = (res: Response, error: ErrorResponse) => {
   return res.status(error.status).json({ error: error.message });
 };
-
 
 app.use(
   (err: ErrorResponse, req: Request, res: Response, next: NextFunction) => {

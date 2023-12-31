@@ -61,7 +61,10 @@ const loginUser: RequestHandler = async (req: Request, res: Response) => {
 
     res
       .status(200)
-      .cookie("access_token", token, { httpOnly: true })
+      .cookie("access_token", token, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === "production",
+      })
       .json({ success: true, message: "Login successful" });
   } catch (error) {
     return res.status(500).send((error as Error).message);
